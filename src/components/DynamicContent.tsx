@@ -6,8 +6,8 @@ async function fetchUserData() {
   // 動的関数を呼び出してSSGを防ぐ
   cookies();
   
-  // 意図的に遅延を追加（3秒）
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  // 意図的に遅延を追加（7秒）
+  await new Promise(resolve => setTimeout(resolve, 7000));
   
   const fetchTime = new Date().toLocaleString('ja-JP');
   

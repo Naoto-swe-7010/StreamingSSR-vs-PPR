@@ -7,18 +7,18 @@ export default function HeavyStaticContent() {
     
     // 意図的に非常に重い計算を実行（ビルド時に実行）
     // 基本的な数学計算
-    for (let i = 0; i < 25000000; i++) { // 2500万回に増加
+    for (let i = 0; i < 2500000; i++) { // 2500万回に増加
       result += Math.sqrt(i) + Math.sin(i) + Math.cos(i);
     }
     
     // 複雑な計算処理
-    for (let i = 0; i < 5000000; i++) { // 500万回の複雑な計算
+    for (let i = 0; i < 500000; i++) { // 500万回の複雑な計算
       complexResult += Math.pow(i, 1.5) + Math.log(i + 1) + Math.tan(i / 1000);
     }
     
     // 文字列処理も追加
     let stringResult = '';
-    for (let i = 0; i < 100000; i++) {
+    for (let i = 0; i < 10000; i++) {
       stringResult += `item-${i}-${Math.random().toString(36)}-`;
     }
     
