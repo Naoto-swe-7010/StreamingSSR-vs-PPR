@@ -1,9 +1,15 @@
 import { Suspense } from 'react';
+import { cookies } from 'next/headers';
 
 // データ取得をシミュレートする関数
 async function fetchUserData() {
+  // 動的関数を呼び出してSSGを防ぐ
+  cookies();
+  
   // 意図的に遅延を追加（3秒）
   await new Promise(resolve => setTimeout(resolve, 3000));
+  
+  const fetchTime = new Date().toLocaleString('ja-JP');
   
   return {
     user: {
@@ -22,6 +28,7 @@ async function fetchUserData() {
       action: `アクティビティ ${i + 1}`,
       timestamp: new Date(Date.now() - Math.random() * 86400000).toLocaleString('ja-JP'),
     })),
+    fetchTime: fetchTime,
   };
 }
 
@@ -31,6 +38,18 @@ async function UserProfile() {
   return (
     <div className="bg-gradient-to-r from-purple-400 to-pink-400 p-8 rounded-lg shadow-lg text-white">
       <h2 className="text-3xl font-bold mb-6">動的ユーザー情報</h2>
+      
+      <div className="mb-4 p-3 bg-white/20 rounded-lg backdrop-blur-sm">
+        <p className="text-sm opacity-90">
+          🕐 データ取得時刻: {data.fetchTime}
+        </p>
+        <p className="text-xs opacity-75">
+          ※ 3秒の遅延後にサーバーサイドで生成
+        </p>
+        <p className="text-yellow-200 text-xs font-semibold">
+          ⏳ この部分のみ遅延表示（動的部分）
+        </p>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white/20 p-6 rounded-lg backdrop-blur-sm">
@@ -85,6 +104,12 @@ function LoadingSkeleton() {
   return (
     <div className="bg-gray-200 p-8 rounded-lg shadow-lg animate-pulse">
       <div className="h-8 bg-gray-300 rounded w-1/3 mb-6"></div>
+      
+      <div className="mb-4 p-3 bg-gray-300 rounded-lg">
+        <div className="h-4 bg-gray-400 rounded w-2/3 mb-2"></div>
+        <div className="h-3 bg-gray-400 rounded w-1/2 mb-2"></div>
+        <div className="h-3 bg-gray-400 rounded w-3/4"></div>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-gray-300 p-6 rounded-lg">
