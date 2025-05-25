@@ -44,14 +44,14 @@ export default function HomePage() {
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Streaming SSRの仕組み</h2>
               <div className="space-y-4">
                 <div className="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                  <h3 className="font-semibold text-blue-800 mb-2">静的部分（右の重いコンテンツ）</h3>
+                  <h3 className="font-semibold text-blue-800 mb-2">静的部分（動的ユーザ情報以外）</h3>
                   <p className="text-blue-700 text-sm">
                     リクエスト時にサーバーでレンダリングされます。
                     重い計算処理があると、その分ユーザーは待機する必要があります。
                   </p>
                 </div>
                 <div className="p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
-                  <h3 className="font-semibold text-purple-800 mb-2">動的部分（下のユーザー情報）</h3>
+                  <h3 className="font-semibold text-purple-800 mb-2">動的部分（動的ユーザ情報）</h3>
                   <p className="text-purple-700 text-sm">
                     リクエスト時にサーバーでレンダリングされ、
                     Suspenseでストリーミングされます。
@@ -64,8 +64,9 @@ export default function HomePage() {
             <div className="bg-red-50 p-4 rounded-lg border border-red-200">
               <h3 className="font-semibold text-red-800 mb-2">⚠️ パフォーマンスの制約</h3>
               <p className="text-red-700 text-sm">
-                すべてのコンテンツがサーバーサイドでレンダリングされるため、
-                重い静的部分の処理が完了するまでページの表示が始まりません。
+                静的部分もリクエスト毎にサーバーサイドでレンダリングされるため、
+                重い静的部分の処理が完了するまでページの表示が始まりません。<br />
+                →静的部分がSSRの動きとなる。
               </p>
             </div>
 
